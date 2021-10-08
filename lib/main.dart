@@ -1,4 +1,5 @@
 import 'package:flash_chat/screens/calculator.dart';
+import 'package:flash_chat/screens/chatbot.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/screens/welcome_screen.dart';
 import 'package:flash_chat/screens/login_screen.dart';
@@ -27,6 +28,7 @@ class FlashChat extends StatelessWidget {
         Profile.id: (context) => Profile(),
         Location.id: (context) => Location(),
         Calculator.id: (context) => Calculator(),
+        ChatBot.id: (context) => ChatBot(),
       },
     );
   }

@@ -1,15 +1,16 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flash_chat/screens/calculator.dart';
+import 'package:flash_chat/screens/chatbot.dart';
 import 'package:flash_chat/screens/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flash_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoder/geocoder.dart';
+import 'package:flash_chat/constants.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
@@ -27,6 +28,8 @@ class _ChatScreenState extends State<ChatScreen> {
   String username;
   String userEmail;
   String userImage;
+  final GlobalKey<State> conversationLoader = new GlobalKey<State>();
+
   void getCurrentUser() async {
     try {
       final user = await _auth.currentUser();
@@ -64,7 +67,15 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: null,
+        leading: FlatButton(
+          child: Icon(
+            Icons.chat_bubble,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pushNamed(context, ChatBot.id);
+          },
+        ),
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.close),
